@@ -7,7 +7,6 @@ import magic
 from getpass import getpass
 
 api_url = 'http://127.0.0.1:8000'
-#api_url = 'https://329a-2409-4072-8e82-664f-929-f9b7-42f6-6436.ngrok.io'
 
 def printLines():
     print("--------------------------------------------------------")
