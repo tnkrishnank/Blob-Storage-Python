@@ -1,0 +1,48 @@
+--Creation of logindetails TABLE
+CREATE TABLE logindetails(
+	uid INTEGER,
+	username TEXT UNIQUE NOT NULL,
+	fullname TEXT NOT NULL,
+	password TEXT NOT NULL,
+	disabled Boolean NOT NULL,
+
+	PRIMARY KEY(uID)
+)
+
+--Creation of filedetails TABLE
+CREATE TABLE filedetails(
+	fileid INTEGER,
+	filename TEXT,
+	filelink TEXT,
+	links INTEGER,
+
+	PRIMARY KEY(fileid)
+)
+
+--Creation of fileowner TABLE
+CREATE TABLE fileowner(
+	ownerid INTEGER,
+	fileid INTEGER,
+
+	PRIMARY KEY(ownerid, fileid),
+	FOREIGN KEY(ownerid) REFERENCES logindetails(uid) ON DELETE CASCADE,
+	FOREIGN KEY(fileid) REFERENCES filedetails(fileid) ON DELETE CASCADE
+)
+
+--Creation of sharedfiles TABLE
+CREATE TABLE sharedfiles(
+	filefrom INTEGER,
+	fileto INTEGER,
+	fileid INTEGER,
+	filename TEXT,
+
+	PRIMARY KEY(filefrom, fileto, fileid),
+	FOREIGN KEY(filefrom) REFERENCES logindetails(uid) ON DELETE CASCADE,
+	FOREIGN KEY(fileto) REFERENCES logindetails(uid) ON DELETE CASCADE,
+	FOREIGN KEY(fileid) REFERENCES filedetails(fileid) ON DELETE CASCADE
+)
+
+SELECT * FROM logindetails;
+SELECT * FROM filedetails;
+SELECT * FROM fileowner;
+SELECT * FROM sharedfiles;
